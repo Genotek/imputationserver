@@ -71,13 +71,15 @@ public class DefaultPreferenceStore {
 		defaults.setProperty("chunksize", "20000000");
 		defaults.setProperty("phasing.window", "5000000");
 		defaults.setProperty("minimac.window", "500000");
+		defaults.setProperty("minimac.vcores", "1");
+		defaults.setProperty("eagle.vcores", "1");
 		defaults.setProperty("minimac.sendmail", "no");
 		defaults.setProperty("server.url", "https://imputationserver.sph.umich.edu");
 		defaults.setProperty("minimac.tmp", "/tmp");
 		defaults.setProperty("minimac.command",
 				"--refHaps ${ref} --haps ${vcf} --start ${start} --end ${end} --window ${window} --prefix ${prefix} --chr ${chr} --cpus 1 --noPhoneHome --format GT,DS,GP --allTypedSites --meta --minRatio 0.00001 ${chr =='MT' ? '--myChromosome ' + chr : ''} ${unphased ? '--unphasedOutput' : ''} ${mapMinimac != null ? '--referenceEstimates --map ' + mapMinimac : ''}");
 		defaults.setProperty("eagle.command",
-				"--vcfRef ${ref} --vcfTarget ${vcf} --geneticMapFile ${map} --outPrefix ${prefix} --bpStart ${start} --bpEnd ${end} --allowRefAltSwap --vcfOutFormat z --keepMissingPloidyX");
+				"--numThreads ${eagle.vcores} --vcfRef ${ref} --vcfTarget ${vcf} --geneticMapFile ${map} --outPrefix ${prefix} --bpStart ${start} --bpEnd ${end} --allowRefAltSwap --vcfOutFormat z --keepMissingPloidyX");
 		defaults.setProperty("beagle.command",
 				"-jar ${beagle} ref=${ref} gt=${vcf} out=${prefix} nthreads=1 chrom=${chr}:${start}-${end} map=${map} impute=false");
 		defaults.setProperty("ref.fasta", "v37");
